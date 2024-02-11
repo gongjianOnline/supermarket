@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 class ListPageController extends GetxController {
   //TODO: Implement ListPageController
 
-  final count = 0.obs;
+  RxString titleName = "生产日期".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +20,4 @@ class ListPageController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
