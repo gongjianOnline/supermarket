@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/errlist_controller.dart';
+// import '../controllers/errlist_controller.dart';
 
 class ErrlistBinding extends Bindings {
   @override
