@@ -10,6 +10,9 @@ void main() {
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      theme: ThemeData(
+        primaryColor: Colors.blue, // 设置主题颜色为蓝色
+      ),
     ),
   );
 }

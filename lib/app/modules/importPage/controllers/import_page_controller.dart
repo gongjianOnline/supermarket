@@ -1,9 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ImportPageController extends GetxController {
   //TODO: Implement ImportPageController
 
-  final count = 0.obs;
+  TextEditingController tradeNameController = TextEditingController();
+  TextEditingController createDateController = TextEditingController();
+  TextEditingController warrantyController = TextEditingController();
+
+  RxString titleName = "商品名称".obs;
+  RxString tradeName = "".obs;
+  RxString createDate = "".obs;
+  RxString warranty = "".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +28,4 @@ class ImportPageController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }

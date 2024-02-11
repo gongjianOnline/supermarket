@@ -9,10 +9,13 @@ class ListPageView extends GetView<ListPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(
-        child: Text(
-          'ListPageView is working',
-          style: TextStyle(fontSize: 20),
+      body:Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:[
+              Row()
+            ]
         ),
       ),
     );
