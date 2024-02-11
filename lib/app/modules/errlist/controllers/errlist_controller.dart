@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 class ErrlistController extends GetxController {
   //TODO: Implement ErrlistController
 
-  final count = 0.obs;
+  RxString titleName = "生产日期".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +19,4 @@ class ErrlistController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
