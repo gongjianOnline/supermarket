@@ -15,10 +15,19 @@ class ListPageView extends GetView<ListPageController> {
         children: [
           Expanded(
             flex: 1,
-            child: ListView(
-              children: [
-                itemContainer(0),
-              ],
+            child: RefreshIndicator(
+              onRefresh: (){
+                return controller.getList();
+              },
+              child: ListView(
+                // children: [
+                //   itemContainer(0),
+                // ],
+                children: controller.listData
+                    .map((element) => itemContainer(element))
+                    .toList()
+                    .cast<Widget>(),
+              ),
             ),
           )
         ],
@@ -26,16 +35,16 @@ class ListPageView extends GetView<ListPageController> {
     });
   }
 
-  itemContainer(index) {
+  itemContainer(item) {
     return SwipeActionCell(
 
         /// 这个key是必要的
-        key: ValueKey(index),
+        key: ValueKey(item["id"]),
         trailingActions: <SwipeAction>[
           SwipeAction(
               title: "删除",
               onTap: (CompletionHandler handler) async {
-                print(index);
+                controller.delItem(item["id"]);
               },
               color: Colors.red),
         ],
@@ -56,19 +65,21 @@ class ListPageView extends GetView<ListPageController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: const Text("商品名称: ", style: TextStyle(fontSize: 18)),
+                child: Text("商品名称: ${item['commodityName']}",
+                    style: TextStyle(fontSize: 18)),
                 padding: const EdgeInsets.only(bottom: 10),
               ),
               Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Text("${controller.titleName.value}: 2024-10-10",
+                    child: Text(
+                        "${controller.titleName.value}: ${item['createDateTxt']}",
                         style: TextStyle(fontSize: 16)),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Text("截止日期: 2024-10-11",
+                    child: Text("截止日期: ${item['endDateTxt']}",
                         style: TextStyle(fontSize: 16)),
                   )
                 ],
@@ -77,7 +88,8 @@ class ListPageView extends GetView<ListPageController> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Text("保质期: 2个月", style: TextStyle(fontSize: 16)),
+                    child: Text("保质期: ${item['month']} 个月",
+                        style: TextStyle(fontSize: 16)),
                   ),
                   Expanded(flex: 1, child: Container())
                 ],

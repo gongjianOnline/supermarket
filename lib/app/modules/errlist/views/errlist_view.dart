@@ -16,9 +16,10 @@ class ErrlistView extends GetView<ErrlistController> {
           Expanded(
             flex: 1,
             child: ListView(
-              children: [
-                itemContainer(0),
-              ],
+              children: controller.listData
+                  .map((element) => itemContainer(element))
+                  .toList()
+                  .cast<Widget>(),
             ),
           )
         ],
@@ -26,16 +27,16 @@ class ErrlistView extends GetView<ErrlistController> {
     });
   }
 
-  itemContainer(index) {
+  itemContainer(itemData) {
     return SwipeActionCell(
 
         /// 这个key是必要的
-        key: ValueKey(index),
+        key: ValueKey(itemData["id"]),
         trailingActions: <SwipeAction>[
           SwipeAction(
               title: "已处理",
               onTap: (CompletionHandler handler) async {
-                print(index);
+                controller.delItem(itemData["id"]);
               },
               color: Colors.red),
         ],
@@ -43,7 +44,7 @@ class ErrlistView extends GetView<ErrlistController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: Colors.black12, // 边框颜色
+              color: Colors.red, // 边框颜色
               width: 1, // 边框宽度
             ),
           ),
@@ -56,19 +57,21 @@ class ErrlistView extends GetView<ErrlistController> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: const Text("商品名称: ", style: TextStyle(fontSize: 18)),
+                child: Text("商品名称: ${itemData['commodityName']}",
+                    style: TextStyle(fontSize: 18)),
                 padding: const EdgeInsets.only(bottom: 10),
               ),
               Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Text("${controller.titleName.value}: 2024-10-10",
+                    child: Text(
+                        "${controller.titleName.value}: ${itemData["createDateTxt"]}",
                         style: TextStyle(fontSize: 16)),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Text("截止日期: 2024-10-11",
+                    child: Text("截止日期: ${itemData["endDateTxt"]}",
                         style: TextStyle(fontSize: 16)),
                   )
                 ],
@@ -77,7 +80,8 @@ class ErrlistView extends GetView<ErrlistController> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: Text("保质期: 2个月", style: TextStyle(fontSize: 16)),
+                    child: Text("保质期: ${itemData["month"]} 个月",
+                        style: TextStyle(fontSize: 16)),
                   ),
                   Expanded(flex: 1, child: Container())
                 ],

@@ -11,111 +11,98 @@ class ImportPageView extends GetView<ImportPageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx((){
+    return Obx(() {
       return Scaffold(
         body: Container(
-          padding: const EdgeInsets.only(left: 10,right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children:[
+              children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0), // 设置外边距为20.0
                   child: Row(
                     children: [
                       Text(controller.titleName.value),
                       Expanded(
-                          flex:1,
-                          child:Container(
-                            margin:const EdgeInsets.only(left: 10.0),
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10.0),
                             height: 50.0,
                             child: TextField(
-                              controller: controller.tradeNameController,
-                                onChanged:(value){
+                                controller: controller.tradeNameController,
+                                onChanged: (value) {
                                   controller.tradeName.value = value;
                                 },
-                                decoration:const InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "商品名称", // 提示词
                                   border: OutlineInputBorder(), // 带边框
-                                )
-                            ),
-                          )
-                      )
+                                )),
+                          ))
                     ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child:Row(
+                  child: Row(
                     children: [
                       const Text("生产日期"),
                       Expanded(
-                          flex:1,
-                          child:Container(
-                            margin:const EdgeInsets.only(left: 10.0),
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10.0),
                             height: 50.0,
                             child: TextField(
-                               controller: controller.createDateController,
-                                onChanged: (value){
+                                controller: controller.createDateController,
+                                onChanged: (value) {
                                   controller.createDate.value = value;
                                 },
                                 decoration: const InputDecoration(
                                   hintText: "生产日期 2024-2-11", // 提示词
                                   border: OutlineInputBorder(), // 带边框
-                                )
-                            ),
-                          )
-                      )
+                                )),
+                          ))
                     ],
                   ),
                 ),
                 Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child:Row(
+                    child: Row(
                       children: [
                         const Text("保质期     "),
                         Expanded(
-                            flex:1,
-                            child:Container(
-                              margin:const EdgeInsets.only(left: 10.0),
+                            flex: 1,
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 10.0),
                               height: 50.0,
                               child: TextField(
+                                  keyboardType: TextInputType.number,
                                   controller: controller.warrantyController,
-                                  onChanged:(value){
+                                  onChanged: (value) {
                                     controller.warranty.value = value;
                                   },
                                   decoration: const InputDecoration(
                                     hintText: "月份 2", // 提示词
                                     border: OutlineInputBorder(), // 带边框
-                                  )
-                              ),
-                            )
-                        )
+                                  )),
+                            ))
                       ],
-                    )
-                ),
-
+                    )),
                 Padding(
-                  padding:  EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(20.0),
                   child: ElevatedButton(
-                      onPressed:(){
-                        controller.tradeName.value = "";
-                        controller.createDate.value = "";
-                        controller.warranty.value = "";
-                        controller.tradeNameController.clear();
-                        controller.createDateController.clear();
-                        controller.warrantyController.clear();
-
+                      onPressed: () {
+                        controller.handleSubmit();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue, // 设置按钮背景颜色为蓝色
                       ),
-                      child:const Text("提交录入商品",style: TextStyle(color:Colors.white),)
-                  ),
+                      child: const Text(
+                        "提交录入商品",
+                        style: TextStyle(color: Colors.white),
+                      )),
                 )
-
-              ]
-          ),
+              ]),
         ),
       );
     });
