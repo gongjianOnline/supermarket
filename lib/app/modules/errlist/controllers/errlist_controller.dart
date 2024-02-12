@@ -27,7 +27,7 @@ class ErrlistController extends GetxController {
   }
 
   void getErrList() async {
-    var response = await dio.get("http://192.168.77.9:3000/err");
+    var response = await dio.get("http://114.115.218.92:3010/err");
     Map<String, dynamic> jsonData = json.decode(response.toString());
     print(jsonData);
     listData.value = jsonData["data"];
@@ -35,7 +35,7 @@ class ErrlistController extends GetxController {
 
   void delItem(id) async {
     final response = await dio.get(
-      'http://192.168.77.9:3000/del',
+      'http://114.115.218.92:3010/del',
       queryParameters: {"id": id},
     );
     getErrList();

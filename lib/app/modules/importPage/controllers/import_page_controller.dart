@@ -39,7 +39,7 @@ class ImportPageController extends GetxController {
       createDate.value = createDate.value.replaceAll('。', '');
     }
     final response = await dio.get(
-      'http://192.168.77.9:3000/add',
+      'http://114.115.218.92:3010/add',
       queryParameters: {
         "tradeName": tradeName.value,
         "warranty": warranty.value,

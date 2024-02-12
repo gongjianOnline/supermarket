@@ -27,7 +27,7 @@ class ListPageController extends GetxController {
   }
 
   getList() async {
-    final response = await dio.get('http://192.168.77.9:3000/query');
+    final response = await dio.get('http://114.115.218.92:3010/query');
     Map<String, dynamic> jsonData = json.decode(response.toString());
     listData.value = jsonData["data"];
     return jsonData["data"];
@@ -35,7 +35,7 @@ class ListPageController extends GetxController {
 
   void delItem(id) async {
     final response = await dio.get(
-      'http://192.168.77.9:3000/del',
+      'http://114.115.218.92:3010/del',
       queryParameters: {"id": id},
     );
     print(response);
