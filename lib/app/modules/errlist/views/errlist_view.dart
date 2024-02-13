@@ -15,12 +15,16 @@ class ErrlistView extends GetView<ErrlistController> {
         children: [
           Expanded(
             flex: 1,
-            child: ListView(
-              children: controller.listData
-                  .map((element) => itemContainer(element))
-                  .toList()
-                  .cast<Widget>(),
-            ),
+            child: RefreshIndicator(
+                onRefresh: () {
+                  return controller.getErrList();
+                },
+                child: ListView(
+                  children: controller.listData
+                      .map((element) => itemContainer(element))
+                      .toList()
+                      .cast<Widget>(),
+                )),
           )
         ],
       ));
@@ -83,7 +87,11 @@ class ErrlistView extends GetView<ErrlistController> {
                     child: Text("保质期: ${itemData["month"]} 个月",
                         style: TextStyle(fontSize: 16)),
                   ),
-                  Expanded(flex: 1, child: Container())
+                  Expanded(
+                    flex: 1,
+                    child: Text("距离到期: ${itemData['distance']} 天",
+                        style: TextStyle(fontSize: 16)),
+                  )
                 ],
               )
             ],

@@ -26,11 +26,12 @@ class ErrlistController extends GetxController {
     super.onClose();
   }
 
-  void getErrList() async {
+  getErrList() async {
     var response = await dio.get("http://114.115.218.92:3010/err");
     Map<String, dynamic> jsonData = json.decode(response.toString());
     print(jsonData);
     listData.value = jsonData["data"];
+    return jsonData;
   }
 
   void delItem(id) async {

@@ -13,10 +13,53 @@ class ListPageView extends GetView<ListPageController> {
       return Scaffold(
           body: Column(
         children: [
+          Container(
+            height: 70,
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+            child: Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: TextField(
+                        controller: controller.queryInputController,
+                        onChanged: (value) {
+                          controller.queryValue.value = value;
+                        },
+                        decoration: const InputDecoration(
+                          hintText: "搜索商品名称", // 提示词
+                          border: OutlineInputBorder(), // 带边框
+                        ))),
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller.queryFillFun();
+                    },
+                    child: const Text("搜索"),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0), // 设置圆角半径
+                      )),
+                      fixedSize: MaterialStateProperty.all<Size>(
+                        Size(80, 50), // 设置高度为50
+                      ),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.blue, // 设置背景颜色
+                      ),
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                        Colors.white, // 设置文字颜色为白色
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
           Expanded(
             flex: 1,
             child: RefreshIndicator(
-              onRefresh: (){
+              onRefresh: () {
                 return controller.getList();
               },
               child: ListView(
@@ -91,7 +134,11 @@ class ListPageView extends GetView<ListPageController> {
                     child: Text("保质期: ${item['month']} 个月",
                         style: TextStyle(fontSize: 16)),
                   ),
-                  Expanded(flex: 1, child: Container())
+                  Expanded(
+                    flex: 1,
+                    child: Text("距离到期: ${item['distance']} 天",
+                        style: TextStyle(fontSize: 16)),
+                  )
                 ],
               )
             ],
