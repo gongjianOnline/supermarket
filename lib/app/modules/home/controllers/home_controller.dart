@@ -36,7 +36,7 @@ class HomeController extends GetxController {
 
   /**数据库去重操作 */
   void handleDuplicate() async {
-    final response = await dio.get('http://114.115.218.92:3010/initDB');
+    final response = await dio.get('http://49.235.118.199:3010/initDB');
     Fluttertoast.showToast(
         msg: "去重完成,刷新商品列表",
         toastLength: Toast.LENGTH_SHORT,
